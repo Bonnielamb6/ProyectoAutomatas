@@ -1,13 +1,12 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 
 public class Ventana extends JFrame {
-
+    Automata automata = new Automata();
     JTextArea textArea;
-
+    JButton btnEvaluar;
 
     public Ventana() {
         setSize(800, 800);
@@ -58,12 +57,19 @@ public class Ventana extends JFrame {
         scrollPane.setBounds(50, 50, 700, 600);
 
 
-        JButton button = new JButton("Evaluar");
-        button.setBounds(350, 700, 100, 30);
+        btnEvaluar = new JButton("Evaluar");
+        btnEvaluar.setBounds(350, 700, 100, 30);
+
+        btnEvaluar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                evaluar();
+            }
+        });
 
         // Añadir el JScrollPane en el centro y el botón en el sur del BorderLayout
         add(scrollPane);
-        add(button);
+        add(btnEvaluar);
     }
 
     private void cargarArchivo() {
@@ -92,6 +98,18 @@ public class Ventana extends JFrame {
         }
     }
 
+    private void evaluar() {
+        String texto = textArea.getText();
+        String[] lineas = texto.split("\\n");
+
+        for (String linea : lineas) {
+            String[] palabras = linea.split("\\s+");
+            for (String palabra : palabras) {
+                automata.evaluar(palabra);
+            }
+
+        }
+    }
 
     public static void main(String[] args) {
         Ventana ventana = new Ventana();
