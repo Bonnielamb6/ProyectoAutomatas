@@ -230,7 +230,9 @@ public class Automata {
             numeroEntero(palabra.substring(1));
         } else if (simboloActual == '.') {
             numeroDecimal(palabra.substring(1));
-        } else {
+        } else if (simboloActual == ' '){
+            numerosEnteros++;
+        }else {
             errores++;
         }
     }
