@@ -15,9 +15,15 @@ public class Automata {
     private int parentesis;
     private int llaves;
     private int errores;
-
-
+    private String[] listaPalabrasReservadas =
+            {"if", "main", "else", "switch",
+                    "case", "default", "for", "do",
+                    "while", "break", "int", "String",
+                    "double", "char", "print"};
+    private String palabraCompleta;
     public void evaluar(String palabra) {
+        palabraCompleta = palabra;
+        palabra = palabra.concat(" ");
         char simboloActual = palabra.charAt(0);
         //identificadores
         if (Character.isAlphabetic(simboloActual)) {
@@ -85,6 +91,12 @@ public class Automata {
         if (Character.isLetterOrDigit(simboloActual) || simboloActual == '_') {
             identificador(palabra.substring(1));
         } else if (simboloActual == ' ') {
+            for(String id : listaPalabrasReservadas){
+                if(palabraCompleta.equals(id)){
+                    palabrasReservadas++;
+                    identificadores--;
+                }
+            }
             identificadores++;
         } else {
             errores++;
@@ -199,7 +211,7 @@ public class Automata {
             decremento(palabra.substring(1));
         } else if (simboloActual == ' ') {
             operadorAritmetico(palabra);
-        }else if(Character.isDigit(simboloActual)){
+        } else if (Character.isDigit(simboloActual)) {
             numeroEntero(palabra.substring(1));
         } else {
             errores++;
@@ -230,9 +242,9 @@ public class Automata {
             numeroEntero(palabra.substring(1));
         } else if (simboloActual == '.') {
             numeroDecimal(palabra.substring(1));
-        } else if (simboloActual == ' '){
+        } else if (simboloActual == ' ') {
             numerosEnteros++;
-        }else {
+        } else {
             errores++;
         }
     }
@@ -243,66 +255,69 @@ public class Automata {
             numerosDecimales++;
         } else if (Character.isDigit(simboloActual)) {
             numeroDecimal(palabra.substring(1));
-        }else{
+        } else {
             errores++;
         }
     }
 
     private void cadenaCaracteres(String palabra) {
         char simboloActual = palabra.charAt(0);
-        if(simboloActual == ' '){
+        if (simboloActual == ' ') {
             cadenasCaracteres++;
-        }else{
+        } else {
             errores++;
         }
     }
-    private void textoCadenaCaracteres(String palabra){
+
+    private void textoCadenaCaracteres(String palabra) {
         char simboloActual = palabra.charAt(0);
-        if(simboloActual == '"'){
+        if (simboloActual == '"') {
             cadenaCaracteres(palabra.substring(1));
-        }else if (simboloActual == ' '){
+        } else if (simboloActual == ' ') {
             errores++;
-        }else{
+        } else {
             textoCadenaCaracteres(palabra.substring(1));
         }
     }
 
     private void comentario(String palabra) {
         char simboloActual = palabra.charAt(0);
-        if(simboloActual == ' '){
+        if (palabra.isBlank()) {
             comentarios++;
-        }else{
+        } else {
             errores++;
         }
     }
-    private void asterisco (String palabra){
+
+    private void asterisco(String palabra) {
         char simboloActual = palabra.charAt(0);
-        if(simboloActual == '*'){
+        if (simboloActual == '*') {
             asterisco(palabra.substring(1));
-        }else if(simboloActual == '/'){
+        } else if (simboloActual == '/') {
             comentario(palabra.substring(1));
-        }else if (simboloActual == ' '){
+        } else if (simboloActual == ' ') {
             errores++;
-        }else{
+        } else {
             textoComentario(palabra.substring(1));
         }
     }
-    private void textoComentario(String palabra){
+
+    private void textoComentario(String palabra) {
         char simboloActual = palabra.charAt(0);
-        if(simboloActual == ' '){
+        if (simboloActual == ' ') {
             errores++;
-        }else if(simboloActual == '*'){
+        } else if (simboloActual == '*') {
             asterisco(palabra.substring(1));
-        }else{
+        } else {
             textoComentario(palabra.substring(1));
         }
     }
 
     private void comentarioLinea(String palabra) {
         char simboloActual = palabra.charAt(0);
-        if(simboloActual == ' '){
+        if (simboloActual == ' ') {
             comentariosLinea++;
-        }else{
+        } else {
             comentarioLinea(palabra.substring(1));
         }
     }

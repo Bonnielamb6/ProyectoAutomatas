@@ -109,6 +109,23 @@ public class Ventana extends JFrame {
             }
 
         }
+        textArea.append("\n");
+        textArea.append("\nPalabras reservadas: " + automata.getPalabrasReservadas());
+        textArea.append("\nIdentificadores: " + automata.getIdentificadores());
+        textArea.append("\nOperadores relacionales: " + automata.getOperadoresRelacionales());
+        textArea.append("\nOperadores logicos: " + automata.getOperadoresLogicos());
+        textArea.append("\nOperadores aritmeticos: " + automata.getOperadoresAritmeticos());
+        textArea.append("\nIncrementos: " + automata.getIncrementos());
+        textArea.append("\nDecrementos: " + automata.getDecrementos());
+        textArea.append("\nAsignaciones: " + automata.getAsignaciones());
+        textArea.append("\nNumeros enteros: " + automata.getNumerosEnteros());
+        textArea.append("\nNumeros decimales: " + automata.getNumerosDecimales());
+        textArea.append("\nCadenas de caracteres: " + automata.getCadenasCaracteres());
+        textArea.append("\nComentarios: " + automata.getComentarios());
+        textArea.append("\nComentarios de linea: " + automata.getComentariosLinea());
+        textArea.append("\nParentesis: " + automata.getParentesis());
+        textArea.append("\nLlaves: " + automata.getLlaves());
+        textArea.append("\nErrores: " + automata.getErrores());
     }
 
     public static void main(String[] args) {
