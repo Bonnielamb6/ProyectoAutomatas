@@ -21,6 +21,7 @@ public class Automata {
                     "while", "break", "int", "String",
                     "double", "char", "print"};
     private String palabraCompleta;
+
     public void evaluar(String palabra) {
         palabraCompleta = palabra;
         palabra = palabra.concat(" ");
@@ -69,7 +70,7 @@ public class Automata {
             numeroEntero(palabra.substring(1));//revisa si empieza con un numero
         }
         if (simboloActual == '.') {//FALTA ARREGLAR
-            numeroDecimal(palabra.substring(1));//revisa si empieza con un .
+            punto(palabra.substring(1));//revisa si empieza con un .
         }
         //cadenas de caracteres FALTA ARREGLAR
         if (simboloActual == '"') {
@@ -91,8 +92,8 @@ public class Automata {
         if (Character.isLetterOrDigit(simboloActual) || simboloActual == '_') {
             identificador(palabra.substring(1));
         } else if (simboloActual == ' ') {
-            for(String id : listaPalabrasReservadas){
-                if(palabraCompleta.equals(id)){
+            for (String id : listaPalabrasReservadas) {
+                if (palabraCompleta.equals(id)) {
                     palabrasReservadas++;
                     identificadores--;
                 }
@@ -241,9 +242,18 @@ public class Automata {
         if (Character.isDigit(simboloActual)) {
             numeroEntero(palabra.substring(1));
         } else if (simboloActual == '.') {
-            numeroDecimal(palabra.substring(1));
+            punto(palabra.substring(1));
         } else if (simboloActual == ' ') {
             numerosEnteros++;
+        } else {
+            errores++;
+        }
+    }
+
+    private void punto(String palabra) {
+        char simboloActual = palabra.charAt(0);
+        if (Character.isDigit(simboloActual)) {
+            numeroDecimal(palabra.substring(1));
         } else {
             errores++;
         }
