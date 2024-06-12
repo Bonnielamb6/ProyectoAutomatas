@@ -99,6 +99,7 @@ public class Ventana extends JFrame {
     }
 
     private void evaluar() {
+        automata.inicializar();
         String texto = textArea.getText();
         String[] lineas = texto.split("\\n");
 

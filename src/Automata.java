@@ -414,4 +414,24 @@ public class Automata {
     public int getErrores() {
         return errores;
     }
+
+    public void inicializar() {
+        palabrasReservadas = 0;
+        identificadores = 0;
+        operadoresRelacionales = 0;
+        operadoresLogicos = 0;
+        operadoresAritmeticos = 0;
+        incrementos = 0;
+        decrementos = 0;
+        asignaciones = 0;
+        numerosEnteros = 0;
+        numerosDecimales = 0;
+        cadenasCaracteres = 0;
+        comentarios = 0;
+        comentariosLinea = 0;
+
+        parentesis = 0;
+        llaves = 0;
+        errores = 0;
+    }
 }
